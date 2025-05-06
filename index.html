@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Portfolio of Muthuraja M - Machine Learning Engineer and Software Developer." />
+  <meta property="og:title" content="Muthuraja M | ML & Software Engineer" />
+  <meta property="og:image" content="muthuraja.jpg" />
+  <meta property="og:description" content="Passionate about real-world AI solutions, Flutter apps, and problem solving." />
+  <title>Muthuraja M | Portfolio</title>
+  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="logo">MyPortfolio</div>
+      <ul class="nav-links">
+        <li><a href="#hero">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section id="hero" class="fade-in">
+      <div class="hero-container">
+        <div class="hero-text">
+          <h1>Hello,I'm <span class="highlight">Muthuraja M</span></h1>
+          <p>Machine Learning Engineer | Software Developer</p>
+          <div class="hero-buttons">
+            <a href="MUTHURAJA_Resume.pdf" download class="btn">Download Resume</a>
+            <a href="#contact" class="btn btn-outline">Contact Me</a>
+          </div>
+        </div>
+        <div class="hero-image-container">
+          <img src="muthuraja.jpg" alt="Muthuraja M - Profile Photo" class="profile-rectangle" />
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="fade-in">
+      <h2>About Me</h2>
+      <p>
+        Dedicated AI & ML student pursuing a bachelor's degree, proficient in Python and SQL, with strong problem-solving
+        skills demonstrated by solving 300+ problems on LeetCode. Passionate about applying technical skills to develop
+        real-world applications and deliver innovative solutions in the software industry.
+      </p>
+    </section>
+
+    <section id="projects" class="fade-in">
+      <h2 class="section-title">Projects</h2>
+
+      <div class="project-category">
+        <h3>Software Development Projects</h3>
+        <div class="project-grid">
+          <a href="sd_project1.html" class="project-link">
+
+            
+            <div class="project-card" data-aos="zoom-in">
+              
+              <img src="images/sd1.jpeg" alt="Real-time Power Monitoring App Screenshot" />
+              <div  class="project-content">
+                <h4>Real-time Power Monitoring App</h4>
+                <p>Flutter-based app for visualizing and tracking power consumption in real time.</p>
+              </div>
+            </div>
+          </a>
+    
+          <div class="project-card" data-aos="fade-up" data-aos-delay="200">
+            <img src="images/sd2.jpeg" alt="House Rental Application Screenshot" />
+            <div class="project-content">
+              <h4>E-commerce Application</h4>
+              <p>app have different pannels admin and client where admin can add products and client can see products and buy</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="project-category">
+        <h3>AI Projects</h3>
+        <div class="project-grid">
+
+          <div class="project-card" data-aos="fade-right" data-aos-delay="0">
+            <img src="images/ai1.jpeg" alt="Terrain Recognition Model Output" />
+            <div class="project-content">
+              <h4>Terrain Recognition</h4>
+              <p>Classified terrain types using CNN models with TensorFlow and Python.</p>
+            </div>
+          </div>
+
+          <div class="project-card" data-aos="fade-right" data-aos-delay="0">
+            <img src="images/ai3.png" alt="Terrain Recognition Model Output" />
+            <div class="project-content">
+              <h4>Sentiment analysis using Youtube WatchHistory</h4>
+              <p> find a person personality</p>
+            </div>
+          </div>
+
+
+          <div class="project-card" data-aos="zoom-in" data-aos-delay="100">
+            <img src="images/ai2.jpeg" alt="Speech Translator Interface" />
+            <div class="project-content">
+              <h4>Speech Translator</h4>
+              <p>Translated English speech to Tamil using Python, NLP, and speech processing libraries.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills" class="fade-in">
+      <h2>Skills</h2>
+      <div class="skills-grid">
+        <div class="skill-item"><img src="images/python.jpeg" alt="Python Logo" /><p>Python</p></div>
+        <div class="skill-item"><img src="images/sql.jpeg" alt="SQL Logo" /><p>SQL</p></div>
+        <div class="skill-item"><img src="images/pandas.jpg" alt="Pandas Logo" /><p>Pandas</p></div>
+        <div class="skill-item"><img src="images/ml.jpeg" alt="Machine Learning Icon" /><p>Machine Learning</p></div>
+        <div class="skill-item"><img src="images/nlp.jpeg" alt="NLP Icon" /><p>NLP</p></div>
+        <div class="skill-item"><img src="images/dl.jpeg" alt="Deep Learning Icon" /><p>Deep Learning</p></div>
+        <div class="skill-item"><img src="images/flutter.jpeg" alt="Flutter Logo" /><p>Flutter</p></div>
+        <div class="skill-item"><img src="images/dart.jpeg" alt="Dart Logo" /><p>Dart</p></div>
+        <div class="skill-item"><img src="images/html.png" alt="HTML Logo" /><p>HTML</p></div>
+        <div class="skill-item"><img src="images/css.png" alt="CSS Logo" /><p>CSS</p></div>
+      </div>
+    </section>
+
+    <section id="contact" class="fade-in">
+      <h2>Contact</h2>
+      <form action="https://formsubmit.co/muthuraja05980@gmail.com" method="POST">
+        <input type="text" name="name" placeholder="Your Name" required />
+        <input type="email" name="email" placeholder="Your Email" required />
+        <textarea name="message" placeholder="Your Message" required></textarea>
+        
+        <!-- Optional: Prevent spam -->
+        <!-- <input type="hidden" name="_captcha" value="false">
+        Redirect after form is submitted
+        <input type="hidden" name="_next" value="https://your-portfolio.com/thank-you.html"> -->
+        
+        <button type="submit">Send</button>
+      </form>
+      
+    </section>
+  </main>
+
+  <footer class="footer" id="ft">
+    <p>&copy; 2025 Muthuraja M</p>
+    <div class="social-links">
+      <a href="https://www.linkedin.com/in/muthuraja93/" target="_blank">
+        <i class="fab fa-linkedin"></i> LinkedIn
+      </a>
+      <a href="https://github.com/Muthuraja997" target="_blank">
+        <i class="fab fa-github"></i> GitHub
+      </a>
+      <a href="tel:+919344058085">
+        <i class="fas fa-phone-alt"></i> +91 9344058085
+      </a>
+      <a href="mailto:muthuraja05980@gmail.com">
+        <i class="fas fa-envelope"></i> muthuraja05980@gmail.com
+      </a>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
+<script>
+  AOS.init({
+    duration: 1000,
+    once: true, // only animate once
+  });
+</script>
+
+<script src="script.js"></script>
+
+  
+
+</body>
+</html>
