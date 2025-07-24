@@ -1,190 +1,403 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Portfolio of Muthuraja M - Machine Learning Engineer and Software Developer." />
-  <meta property="og:title" content="Muthuraja M | ML & Software Engineer" />
-  <meta property="og:image" content="muthuraja.jpg" />
-  <meta property="og:description" content="Passionate about real-world AI solutions, Flutter apps, and problem solving." />
-  <title>Muthuraja M | Portfolio</title>
-  <link href="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.css" rel="stylesheet">
-  <link rel="stylesheet" href="style.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Muthuraja M - Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f3f4f6;
+        }
+        .skill-card, .project-card, .cert-card {
+            background-color: #ffffff;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .skill-card:hover, .project-card:hover, .cert-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        /* Hero Section Canvas for particles */
+        #particle-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        /* Scroll Reveal Animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* Staggered card animation */
+        .card-reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+        .reveal.active .card-reveal {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        /* Typing cursor */
+        .typing-cursor {
+            display: inline-block;
+            width: 3px;
+            height: 1.2em; /* match text size */
+            background-color: white;
+            animation: blink 0.8s infinite;
+            margin-left: 4px;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+        /* Icon hover animation */
+        .skill-card i {
+            transition: transform 0.3s ease;
+        }
+        .skill-card:hover i {
+            transform: scale(1.2) rotate(5deg);
+        }
+        /* Button hover animation */
+        .cta-button {
+             transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .cta-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2);
+        }
+    </style>
 </head>
-<body>
-  <header>
-    <nav>
-      <div class="logo">Portfolio</div>
-      <ul class="nav-links">
-        <li><a href="#hero">Home</a></li>
-        <li><a href="#about">About</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>
-  </header>
+<body class="text-gray-800">
 
-  <main>
-    <section id="hero" class="fade-in">
-      <div class="hero-container">
-        <div class="hero-text">
-          <h1>Hello,I'm <span class="highlight">Muthuraja M</span></h1>
-          <p>Machine Learning Engineer | Software Developer</p>
-          <div class="hero-buttons">
-            <a href="MUTHURAJA_Resume.pdf" download class="btn">Download Resume</a>
-            <a href="#contact" class="btn btn-outline">Contact Me</a>
-          </div>
+    <!-- Header/Nav -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-gray-800">Muthuraja M</a>
+            <div class="hidden md:flex space-x-6">
+                <a href="#about" class="text-gray-600 hover:text-indigo-600">About</a>
+                <a href="#skills" class="text-gray-600 hover:text-indigo-600">Skills</a>
+                <a href="#projects" class="text-gray-600 hover:text-indigo-600">Projects</a>
+                <a href="#certifications" class="text-gray-600 hover:text-indigo-600">Certifications</a>
+                <a href="#contact" class="text-gray-600 hover:text-indigo-600">Contact</a>
+            </div>
+            <div class="md:hidden">
+                <button id="mobile-menu-button" class="text-gray-800 focus:outline-none">
+                    <i class="fas fa-bars fa-lg"></i>
+                </button>
+            </div>
+        </nav>
+        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4">
+            <a href="#about" class="block py-2 text-gray-600 hover:text-indigo-600">About</a>
+            <a href="#skills" class="block py-2 text-gray-600 hover:text-indigo-600">Skills</a>
+            <a href="#projects" class="block py-2 text-gray-600 hover:text-indigo-600">Projects</a>
+            <a href="#certifications" class="block py-2 text-gray-600 hover:text-indigo-600">Certifications</a>
+            <a href="#contact" class="block py-2 text-gray-600 hover:text-indigo-600">Contact</a>
         </div>
-        <div class="hero-image-container">
-          <img src="muthuraja.jpg" alt="Muthuraja M - Profile Photo" class="profile-rectangle" />
+    </header>
+
+    <!-- Hero Section -->
+    <section class="bg-indigo-600 text-white relative overflow-hidden">
+        <canvas id="particle-canvas"></canvas>
+        <div class="container mx-auto px-6 py-20 text-center hero-content">
+            <h1 class="text-4xl md:text-6xl font-bold leading-tight mb-4">Muthuraja M</h1>
+            <p id="hero-subtitle" class="text-lg md:text-xl mb-8 h-8">AI & Machine Learning Engineer | Flutter Developer</p>
+            <a href="#projects" class="bg-white text-indigo-600 font-bold py-3 px-6 rounded-full hover:bg-gray-200 transition duration-300 cta-button inline-block">View My Work</a>
         </div>
-      </div>
     </section>
 
-    <section id="about" class="fade-in">
-      <h2>About Me</h2>
-      <p>
-        Dedicated AI & ML student pursuing a bachelor's degree, proficient in Python and SQL, with strong problem-solving
-        skills demonstrated by solving 300+ problems on LeetCode. Passionate about applying technical skills to develop
-        real-world applications and deliver innovative solutions in the software industry.
-      </p>
-    </section>
-
-    <section id="projects" class="fade-in">
-      <h2 class="section-title">Projects</h2>
-
-      <div class="project-category">
-        <h3>Software Development Projects</h3>
-        <div class="project-grid">
-          <div class="project-card" data-aos="zoom-in">
-              <a href="sd_project1.html" class="project-link">
-              
-              <img src="images/sd1.jpeg" alt="Real-time Power Monitoring App Screenshot" />
-              <div  class="project-content">
-                <h4>Real-time Power Monitoring App</h4>
-                <p>Flutter-based app for visualizing and tracking power consumption in real time.</p>
-              </div>
-            </a>
-            </div>
-    
-          <a href="sd_project2.html" class="project-link">
-
-            <div class="project-card" data-aos="fade-up" data-aos-delay="200">
-              <img src="images/sd2.jpeg" alt="House Rental Application Screenshot" />
-              <div class="project-content">
-                <h4>E-commerce Application</h4>
-                <p>app have different pannels admin and client where admin can add products and client can see products and buy</p>
-              </div>
-            </div>
-          </a>
-
-        </div>
-      </div>
-
-      <div class="project-category">
-        <h3>AI Projects</h3>
-        <div class="project-grid">
-
-          <div class="project-card" data-aos="fade-right" data-aos-delay="0">
-            <a href="https://github.com/Muthuraja997/Terrain_Recognition" style="text-decoration: none;">
-              
-              <img src="images/ai1.jpeg" alt="Terrain Recognition Model Output" />
-              <div class="project-content">
-                <h4>Terrain Recognition</h4>
-                <p>Classified terrain types using CNN models with TensorFlow and Python.</p>
-              </div>
-            </a>
-          </div>
-          
-          <div class="project-card" data-aos="fade-right" data-aos-delay="0">
-              <a href="https://github.com/Muthuraja997/Youtube-History-Analysis" style="text-decoration: none;">
-                <img src="images/ai3.png" alt="Terrain Recognition Model Output" />
-                <div class="project-content">
-                  <h4>Sentiment analysis using Youtube WatchHistory</h4>
-                  <p> find a person personality</p>
+    <!-- About Section -->
+    <section id="about" class="py-20 reveal">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center mb-12">About Me</h2>
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/3 mb-8 md:mb-0">
+                    <img src="https://placehold.co/400x400/818cf8/ffffff?text=MM" alt="Muthuraja M" class="rounded-full mx-auto shadow-lg">
                 </div>
-              </a>
+                <div class="md:w-2/3 md:pl-12">
+                    <p class="text-lg text-gray-700 leading-relaxed">
+                        I am a dedicated AI & ML student currently pursuing my B.Tech degree at Sri Shakthi Institute of Engineering and Technology. With a strong foundation in Python and SQL, I have honed my problem-solving skills by tackling over 300 programming challenges.
+                    </p>
+                    <p class="text-lg text-gray-700 leading-relaxed mt-4">
+                        I am passionate about applying machine learning and Large Language Models (LLMs) to real-world challenges. I have experience developing mobile applications with Flutter, including integrating payment gateways, and my project work spans from deep learning for terrain recognition to building end-to-end data pipelines and language translators. I'm always eager to learn and build practical, impactful solutions.
+                    </p>
+                </div>
             </div>
-            
-            
-            <div class="project-card" data-aos="zoom-in" data-aos-delay="100">
-            <a href="https://github.com/Muthuraja997/Youtube-History-Analysis" style="text-decoration: none;">
-              <img src="images/ai2.jpeg" alt="Speech Translator Interface" />
-              <div class="project-content">
-                <h4>Speech Translator</h4>
-                <p>Translated English speech to Tamil using Python, NLP, and speech processing libraries.</p>
-              </div>
-            </a>
-          </div>
         </div>
-      </div>
     </section>
 
-    <section id="skills" class="fade-in">
-      <h2>Skills</h2>
-      <div class="skills-grid">
-        <div class="skill-item"><img src="images/python.jpeg" alt="Python Logo" /><p>Python</p></div>
-        <div class="skill-item"><img src="images/sql.jpeg" alt="SQL Logo" /><p>SQL</p></div>
-        <div class="skill-item"><img src="images/pandas.jpg" alt="Pandas Logo" /><p>Pandas</p></div>
-        <div class="skill-item"><img src="images/ml.jpeg" alt="Machine Learning Icon" /><p>Machine Learning</p></div>
-        <div class="skill-item"><img src="images/nlp.jpeg" alt="NLP Icon" /><p>NLP</p></div>
-        <div class="skill-item"><img src="images/dl.jpeg" alt="Deep Learning Icon" /><p>Deep Learning</p></div>
-        <div class="skill-item"><img src="images/flutter.jpeg" alt="Flutter Logo" /><p>Flutter</p></div>
-        <div class="skill-item"><img src="images/dart.jpeg" alt="Dart Logo" /><p>Dart</p></div>
-        <div class="skill-item"><img src="images/html.png" alt="HTML Logo" /><p>HTML</p></div>
-        <div class="skill-item"><img src="images/css.png" alt="CSS Logo" /><p>CSS</p></div>
-      </div>
+    <!-- Skills Section -->
+    <section id="skills" class="bg-gray-100 py-20 reveal">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center mb-12">My Skills</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8">
+                <div class="skill-card p-6 rounded-lg shadow-md text-center card-reveal"><i class="fab fa-python fa-3x text-indigo-500 mb-4"></i><h3 class="text-xl font-semibold">Python</h3></div>
+                <div class="skill-card p-6 rounded-lg shadow-md text-center card-reveal"><i class="fas fa-robot fa-3x text-indigo-500 mb-4"></i><h3 class="text-xl font-semibold">Machine Learning</h3></div>
+                <div class="skill-card p-6 rounded-lg shadow-md text-center card-reveal"><i class="fas fa-brain fa-3x text-indigo-500 mb-4"></i><h3 class="text-xl font-semibold">Deep Learning</h3></div>
+                 <div class="skill-card p-6 rounded-lg shadow-md text-center card-reveal"><i class="fas fa-comments fa-3x text-indigo-500 mb-4"></i><h3 class="text-xl font-semibold">LLMs</h3></div>
+                <div class="skill-card p-6 rounded-lg shadow-md text-center card-reveal"><i class="fas fa-mobile-alt fa-3x text-indigo-500 mb-4"></i><h3 class="text-xl font-semibold">Flutter</h3></div>
+                <div class="skill-card p-6 rounded-lg shadow-md text-center card-reveal"><i class="fas fa-comments-dollar fa-3x text-indigo-500 mb-4"></i><h3 class="text-xl font-semibold">Generative AI</h3></div>
+                <div class="skill-card p-6 rounded-lg shadow-md text-center card-reveal"><i class="fas fa-database fa-3x text-indigo-500 mb-4"></i><h3 class="text-xl font-semibold">SQL & DBMS</h3></div>
+                <div class="skill-card p-6 rounded-lg shadow-md text-center card-reveal"><i class="fas fa-language fa-3x text-indigo-500 mb-4"></i><h3 class="text-xl font-semibold">NLP</h3></div>
+                <div class="skill-card p-6 rounded-lg shadow-md text-center card-reveal"><i class="fab fa-html5 fa-3x text-indigo-500 mb-4"></i><h3 class="text-xl font-semibold">HTML/CSS</h3></div>
+                <div class="skill-card p-6 rounded-lg shadow-md text-center card-reveal"><i class="fas fa-cogs fa-3x text-indigo-500 mb-4"></i><h3 class="text-xl font-semibold">OOPs</h3></div>
+            </div>
+        </div>
     </section>
 
-    <section id="contact" class="fade-in">
-      <h2>Contact</h2>
-      <form action="https://formsubmit.co/muthuraja05980@gmail.com" method="POST">
-        <input type="text" name="name" placeholder="Your Name" required />
-        <input type="email" name="email" placeholder="Your Email" required />
-        <textarea name="message" placeholder="Your Message" required></textarea>
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 reveal">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center mb-12">Projects</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project Card 1 -->
+                <div class="project-card rounded-lg shadow-lg overflow-hidden flex flex-col card-reveal">
+                    <img src="https://placehold.co/600x400/34d399/ffffff?text=Power+Conception+App" alt="Project Image" class="w-full h-48 object-cover">
+                    <div class="p-6 flex-grow">
+                        <h3 class="text-xl font-bold mb-2">Power Conception Mobile App</h3>
+                        <p class="text-gray-700 mb-4">A Flutter-based mobile application to monitor and manage power consumption.</p>
+                        <div class="flex flex-wrap gap-2"><span class="bg-indigo-100 text-indigo-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">Flutter</span><span class="bg-green-100 text-green-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">Mobile App</span></div>
+                    </div>
+                    <div class="p-4 bg-gray-50 border-t">
+                        <a href="#" target="_blank" class="w-full text-center block bg-gray-800 text-white font-semibold py-2 px-4 rounded-lg hover:bg-gray-900 transition duration-300"><i class="fab fa-github mr-2"></i>View Code</a>
+                    </div>
+                </div>
+                <!-- Project Card 2 -->
+                <div class="project-card rounded-lg shadow-lg overflow-hidden flex flex-col card-reveal">
+                    <img src="https://placehold.co/600x400/fbbf24/ffffff?text=E-commerce+App" alt="Project Image" class="w-full h-48 object-cover">
+                    <div class="p-6 flex-grow">
+                        <h3 class="text-xl font-bold mb-2">E-commerce Mobile App</h3>
+                        <p class="text-gray-700 mb-4">A full-featured e-commerce application with a payment gateway integration, built with Flutter.</p>
+                        <div class="flex flex-wrap gap-2"><span class="bg-indigo-100 text-indigo-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">Flutter</span><span class="bg-yellow-100 text-yellow-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">Payment Gateway</span></div>
+                    </div>
+                     <div class="p-4 bg-gray-50 border-t">
+                        <a href="#" target="_blank" class="w-full text-center block bg-gray-800 text-white font-semibold py-2 px-4 rounded-lg hover:bg-gray-900 transition duration-300"><i class="fab fa-github mr-2"></i>View Code</a>
+                    </div>
+                </div>
+                <!-- Project Card 3 -->
+                <div class="project-card rounded-lg shadow-lg overflow-hidden flex flex-col card-reveal">
+                    <img src="https://placehold.co/600x400/60a5fa/ffffff?text=Terrain+Recognition" alt="Project Image" class="w-full h-48 object-cover">
+                    <div class="p-6 flex-grow">
+                        <h3 class="text-xl font-bold mb-2">Terrain Recognition System</h3>
+                        <p class="text-gray-700 mb-4">A deep learning model to recognize and classify different types of terrain from images.</p>
+                        <div class="flex flex-wrap gap-2"><span class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">Deep Learning</span><span class="bg-gray-100 text-gray-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">Python</span></div>
+                    </div>
+                     <div class="p-4 bg-gray-50 border-t">
+                        <a href="#" target="_blank" class="w-full text-center block bg-gray-800 text-white font-semibold py-2 px-4 rounded-lg hover:bg-gray-900 transition duration-300"><i class="fab fa-github mr-2"></i>View Code</a>
+                    </div>
+                </div>
+                 <!-- Project Card 4 -->
+                <div class="project-card rounded-lg shadow-lg overflow-hidden flex flex-col card-reveal">
+                    <img src="https://placehold.co/600x400/f87171/ffffff?text=Crop+Recommendation" alt="Project Image" class="w-full h-48 object-cover">
+                    <div class="p-6 flex-grow">
+                        <h3 class="text-xl font-bold mb-2">ETL Crop Recommendation System</h3>
+                        <p class="text-gray-700 mb-4">End-to-end ETL pipeline with Apache Airflow to process weather data and recommend crops using a Random Forest model.</p>
+                        <div class="flex flex-wrap gap-2"><span class="bg-red-100 text-red-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">Apache Airflow</span><span class="bg-yellow-100 text-yellow-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">ETL</span><span class="bg-purple-100 text-purple-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">Random Forest</span></div>
+                    </div>
+                     <div class="p-4 bg-gray-50 border-t">
+                        <a href="#" target="_blank" class="w-full text-center block bg-gray-800 text-white font-semibold py-2 px-4 rounded-lg hover:bg-gray-900 transition duration-300"><i class="fab fa-github mr-2"></i>View Code</a>
+                    </div>
+                </div>
+                <!-- Project Card 5 -->
+                <div class="project-card rounded-lg shadow-lg overflow-hidden flex flex-col card-reveal">
+                    <img src="https://placehold.co/600x400/a78bfa/ffffff?text=Sentiment+Analysis" alt="Project Image" class="w-full h-48 object-cover">
+                    <div class="p-6 flex-grow">
+                        <h3 class="text-xl font-bold mb-2">Sentiment Analysis of YouTube History</h3>
+                        <p class="text-gray-700 mb-4">Analyzed YouTube watch history to categorize user preferences using NLP techniques and the YouTube Data API.</p>
+                        <div class="flex flex-wrap gap-2"><span class="bg-purple-100 text-purple-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">NLP</span><span class="bg-gray-100 text-gray-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">Python</span><span class="bg-red-100 text-red-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">NLTK</span></div>
+                    </div>
+                     <div class="p-4 bg-gray-50 border-t">
+                        <a href="#" target="_blank" class="w-full text-center block bg-gray-800 text-white font-semibold py-2 px-4 rounded-lg hover:bg-gray-900 transition duration-300"><i class="fab fa-github mr-2"></i>View Code</a>
+                    </div>
+                </div>
+                <!-- Project Card 6 -->
+                <div class="project-card rounded-lg shadow-lg overflow-hidden flex flex-col card-reveal">
+                    <img src="https://placehold.co/600x400/ec4899/ffffff?text=Lung+Cancer+Prediction" alt="Project Image" class="w-full h-48 object-cover">
+                    <div class="p-6 flex-grow">
+                        <h3 class="text-xl font-bold mb-2">Lung Cancer Prediction</h3>
+                        <p class="text-gray-700 mb-4">A system to predict lung cancer using various ML algorithms, including ANNs, and evaluated with accuracy metrics.</p>
+                        <div class="flex flex-wrap gap-2"><span class="bg-pink-100 text-pink-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">Machine Learning</span><span class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">ANN</span><span class="bg-gray-100 text-gray-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">Python</span></div>
+                    </div>
+                     <div class="p-4 bg-gray-50 border-t">
+                        <a href="#" target="_blank" class="w-full text-center block bg-gray-800 text-white font-semibold py-2 px-4 rounded-lg hover:bg-gray-900 transition duration-300"><i class="fab fa-github mr-2"></i>View Code</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section id="certifications" class="bg-gray-100 py-20 reveal">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center mb-12">Certifications</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="cert-card p-6 rounded-lg shadow-md text-center card-reveal">
+                    <div class="text-4xl text-indigo-500 mb-4"><i class="fas fa-certificate"></i></div>
+                    <h3 class="text-xl font-semibold mb-2">Python</h3>
+                    <p class="text-gray-600">GUVI</p>
+                </div>
+                <div class="cert-card p-6 rounded-lg shadow-md text-center card-reveal">
+                    <div class="text-4xl text-indigo-500 mb-4"><i class="fas fa-certificate"></i></div>
+                    <h3 class="text-xl font-semibold mb-2">LLM Workshop</h3>
+                    <p class="text-gray-600">IIT Madras</p>
+                </div>
+                <div class="cert-card p-6 rounded-lg shadow-md text-center card-reveal">
+                    <div class="text-4xl text-indigo-500 mb-4"><i class="fas fa-certificate"></i></div>
+                    <h3 class="text-xl font-semibold mb-2">Pandas</h3>
+                    <p class="text-gray-600">Udemy</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 reveal">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-center mb-12">Get In Touch</h2>
+            <div class="max-w-lg mx-auto text-center">
+                <p class="text-lg text-gray-700 mb-8">I'm currently seeking new opportunities. If you have a project in mind or just want to connect, feel free to reach out!</p>
+                <a href="mailto:muthuraja05980@gmail.com" class="bg-indigo-600 text-white font-bold py-3 px-6 rounded-full hover:bg-indigo-700 transition duration-300 inline-block"><i class="fas fa-envelope mr-2"></i> Email Me</a>
+                <div class="flex justify-center space-x-6 mt-8">
+                    <a href="#" class="text-gray-600 hover:text-indigo-600"><i class="fab fa-linkedin fa-2x"></i></a>
+                    <a href="#" class="text-gray-600 hover:text-indigo-600"><i class="fab fa-github fa-2x"></i></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-6">
+        <div class="container mx-auto px-6 text-center">
+            <p>&copy; 2024 Muthuraja M. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // --- DOM Elements ---
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        // --- Event Listeners ---
+        mobileMenuButton.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+
+        // --- Particle Animation ---
+        const canvas = document.getElementById('particle-canvas');
+        const ctx = canvas.getContext('2d');
+        let particles = [];
+
+        function resizeCanvas() {
+            canvas.width = canvas.offsetWidth;
+            canvas.height = canvas.offsetHeight;
+        }
+
+        function createParticles() {
+            particles = [];
+            const particleCount = Math.floor(canvas.width / 30);
+            for (let i = 0; i < particleCount; i++) {
+                particles.push({
+                    x: Math.random() * canvas.width,
+                    y: Math.random() * canvas.height,
+                    radius: Math.random() * 2 + 1,
+                    vx: Math.random() * 1 - 0.5,
+                    vy: Math.random() * 1 - 0.5,
+                    color: 'rgba(255, 255, 255, 0.7)'
+                });
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                p.x += p.vx;
+                p.y += p.vy;
+
+                if (p.x < 0 || p.x > canvas.width) p.vx = -p.vx;
+                if (p.y < 0 || p.y > canvas.height) p.vy = -p.vy;
+
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                ctx.fillStyle = p.color;
+                ctx.fill();
+            });
+            requestAnimationFrame(animateParticles);
+        }
         
-        <!-- Optional: Prevent spam -->
-        <!-- <input type="hidden" name="_captcha" value="false">
-        Redirect after form is submitted
-        <input type="hidden" name="_next" value="https://your-portfolio.com/thank-you.html"> -->
+        // --- Typing Animation ---
+        const subtitleEl = document.getElementById('hero-subtitle');
+        const subtitleText = subtitleEl.textContent;
+        let i = 0;
         
-        <button type="submit">Send</button>
-      </form>
-      
-    </section>
-  </main>
+        function typeWriter() {
+            if (i < subtitleText.length) {
+                if(i === 0) subtitleEl.textContent = '';
+                subtitleEl.textContent += subtitleText.charAt(i);
+                i++;
+                setTimeout(typeWriter, 100); // Typing speed
+            } else {
+                 // Add blinking cursor at the end
+                 subtitleEl.innerHTML += '<span class="typing-cursor"></span>';
+            }
+        }
 
-  <footer class="footer" id="ft">
-    <p>&copy; 2025 Muthuraja M</p>
-    <div class="social-links">
-      <a href="https://www.linkedin.com/in/muthuraja93/" target="_blank">
-        <i class="fab fa-linkedin"></i> LinkedIn
-      </a>
-      <a href="https://github.com/Muthuraja997" target="_blank">
-        <i class="fab fa-github"></i> GitHub
-      </a>
-      <a href="tel:+919344058085">
-        <i class="fas fa-phone-alt"></i> +91 9344058085
-      </a>
-      <a href="mailto:muthuraja05980@gmail.com">
-        <i class="fas fa-envelope"></i> muthuraja05980@gmail.com
-      </a>
-    </div>
-  </footer>
+        // --- Scroll Reveal and Staggered Animation ---
+        function revealSections() {
+            const reveals = document.querySelectorAll('.reveal');
+            for (let i = 0; i < reveals.length; i++) {
+                const windowHeight = window.innerHeight;
+                const elementTop = reveals[i].getBoundingClientRect().top;
+                const elementVisible = 150;
 
-  <script src="https://cdn.jsdelivr.net/npm/aos@2.3.4/dist/aos.js"></script>
-<script>
-  AOS.init({
-    duration: 1000,
-    once: true, // only animate once
-  });
-</script>
+                if (elementTop < windowHeight - elementVisible) {
+                    reveals[i].classList.add('active');
+                } else {
+                    reveals[i].classList.remove('active');
+                }
+            }
+        }
 
-<script src="script.js"></script>
+        // --- Initializations on Load ---
+        window.addEventListener('load', () => {
+            // Particle setup
+            resizeCanvas();
+            createParticles();
+            animateParticles();
 
-  
+            // Typing animation start
+            setTimeout(typeWriter, 500);
 
+            // Staggered delay setup
+            document.querySelectorAll('.reveal').forEach(section => {
+                const cards = section.querySelectorAll('.card-reveal');
+                cards.forEach((card, index) => {
+                    card.style.transitionDelay = `${index * 100}ms`;
+                });
+            });
+            
+            // Initial check for reveals
+            revealSections();
+        });
+
+        window.addEventListener('resize', () => {
+            resizeCanvas();
+            createParticles();
+        });
+
+        window.addEventListener('scroll', revealSections);
+    </script>
 </body>
 </html>
