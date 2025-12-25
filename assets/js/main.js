@@ -104,3 +104,132 @@ chatForm.addEventListener('submit', async (ev) => {
 // Initial friendly seed message
 safeAppendMessage('Hello! I\'m Muthuraja\'s AI assistant. Ask me about his projects, skills, or experience!');
 
+// ============== ANIMATIONS ==============
+
+// Floating Particles
+function createParticles() {
+  const particlesContainer = document.getElementById('particles');
+  if (!particlesContainer) return;
+  
+  const particleCount = 50;
+  
+  for (let i = 0; i < particleCount; i++) {
+    const particle = document.createElement('div');
+    particle.className = 'particle';
+    particle.style.left = Math.random() * 100 + '%';
+    particle.style.animationDelay = Math.random() * 15 + 's';
+    particle.style.animationDuration = (15 + Math.random() * 10) + 's';
+    particle.style.width = (2 + Math.random() * 4) + 'px';
+    particle.style.height = particle.style.width;
+    particlesContainer.appendChild(particle);
+  }
+}
+
+// Scroll Reveal Animation
+function revealOnScroll() {
+  const reveals = document.querySelectorAll('.reveal');
+  const windowHeight = window.innerHeight;
+  
+  reveals.forEach(element => {
+    const elementTop = element.getBoundingClientRect().top;
+    const revealPoint = 150;
+    
+    if (elementTop < windowHeight - revealPoint) {
+      element.classList.add('active');
+    }
+  });
+}
+
+// Smooth scroll for navigation links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  });
+});
+
+// Navbar scroll effect
+let lastScroll = 0;
+window.addEventListener('scroll', () => {
+  const nav = document.querySelector('.nav');
+  const currentScroll = window.pageYOffset;
+  
+  if (currentScroll > 100) {
+    nav.style.background = 'rgba(10, 10, 15, 0.95)';
+    nav.style.boxShadow = '0 4px 30px rgba(0, 0, 0, 0.3)';
+  } else {
+    nav.style.background = 'rgba(10, 10, 15, 0.8)';
+    nav.style.boxShadow = 'none';
+  }
+  
+  lastScroll = currentScroll;
+});
+
+// Mouse trail effect on cards
+document.querySelectorAll('.card').forEach(card => {
+  card.addEventListener('mousemove', (e) => {
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    
+    card.style.setProperty('--mouse-x', `${x}px`);
+    card.style.setProperty('--mouse-y', `${y}px`);
+  });
+});
+
+// Typing animation for hero (optional enhancement)
+function typeWriter(element, text, speed = 50) {
+  let i = 0;
+  element.innerHTML = '';
+  
+  function type() {
+    if (i < text.length) {
+      element.innerHTML += text.charAt(i);
+      i++;
+      setTimeout(type, speed);
+    }
+  }
+  type();
+}
+
+// Initialize on page load
+window.addEventListener('load', () => {
+  createParticles();
+  
+  // Add reveal class to sections for scroll animation
+  document.querySelectorAll('section').forEach(section => {
+    section.classList.add('reveal');
+  });
+  
+  // Trigger initial reveal check
+  setTimeout(revealOnScroll, 100);
+});
+
+// Listen for scroll events
+window.addEventListener('scroll', revealOnScroll);
+
+// Add intersection observer for better performance
+const observerOptions = {
+  threshold: 0.1,
+  rootMargin: '0px 0px -50px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('active');
+    }
+  });
+}, observerOptions);
+
+document.querySelectorAll('.card, section').forEach(el => {
+  observer.observe(el);
+});
+
+console.log('✨ Portfolio loaded with animations!');
