@@ -1,403 +1,214 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Muthuraja M - Portfolio</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #f3f4f6;
-        }
-        .skill-card, .project-card, .cert-card {
-            background-color: #ffffff;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .skill-card:hover, .project-card:hover, .cert-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-        }
-        /* Hero Section Canvas for particles */
-        #particle-canvas {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: 1;
-        }
-        .hero-content {
-            position: relative;
-            z-index: 2;
-        }
-        /* Scroll Reveal Animation */
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        /* Staggered card animation */
-        .card-reveal {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        }
-        .reveal.active .card-reveal {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        /* Typing cursor */
-        .typing-cursor {
-            display: inline-block;
-            width: 3px;
-            height: 1.2em; /* match text size */
-            background-color: white;
-            animation: blink 0.8s infinite;
-            margin-left: 4px;
-        }
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
-        }
-        /* Icon hover animation */
-        .skill-card i {
-            transition: transform 0.3s ease;
-        }
-        .skill-card:hover i {
-            transform: scale(1.2) rotate(5deg);
-        }
-        /* Button hover animation */
-        .cta-button {
-             transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-        .cta-button:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2);
-        }
-    </style>
-</head>
-<body class="text-gray-800">
-
-    <!-- Header/Nav -->
-    <header class="bg-white shadow-md sticky top-0 z-50">
-        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="text-2xl font-bold text-gray-800">Muthuraja M</a>
-            <div class="hidden md:flex space-x-6">
-                <a href="#about" class="text-gray-600 hover:text-indigo-600">About</a>
-                <a href="#skills" class="text-gray-600 hover:text-indigo-600">Skills</a>
-                <a href="#projects" class="text-gray-600 hover:text-indigo-600">Projects</a>
-                <a href="#certifications" class="text-gray-600 hover:text-indigo-600">Certifications</a>
-                <a href="#contact" class="text-gray-600 hover:text-indigo-600">Contact</a>
-            </div>
-            <div class="md:hidden">
-                <button id="mobile-menu-button" class="text-gray-800 focus:outline-none">
-                    <i class="fas fa-bars fa-lg"></i>
-                </button>
-            </div>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Muthuraja — AI Engineer. Conversational AI, RAG, vector search, real-time audio/video (LiveKit, Daily), Twilio integrations, Qdrant and AWS Bedrock deployments.">
+    <meta name="theme-color" content="#071021">
+    <title>Muthuraja — AI Engineer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  </head>
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+    <header class="nav">
+      <div class="container nav-inner">
+        <a class="brand" href="#">Muthuraja</a>
+        <nav role="navigation" aria-label="Main navigation">
+          <a href="#about">About</a>
+          <a href="#skills">Skills</a>
+          <a href="#ai-projects">AI/ML Projects</a>
+          <a href="#other-projects">Other Projects</a>
+          <a href="#demo">Demo</a>
+          <a href="#contact">Contact</a>
         </nav>
-        <div id="mobile-menu" class="hidden md:hidden px-6 pb-4">
-            <a href="#about" class="block py-2 text-gray-600 hover:text-indigo-600">About</a>
-            <a href="#skills" class="block py-2 text-gray-600 hover:text-indigo-600">Skills</a>
-            <a href="#projects" class="block py-2 text-gray-600 hover:text-indigo-600">Projects</a>
-            <a href="#certifications" class="block py-2 text-gray-600 hover:text-indigo-600">Certifications</a>
-            <a href="#contact" class="block py-2 text-gray-600 hover:text-indigo-600">Contact</a>
-        </div>
+      </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="bg-indigo-600 text-white relative overflow-hidden">
-        <canvas id="particle-canvas"></canvas>
-        <div class="container mx-auto px-6 py-20 text-center hero-content">
-            <h1 class="text-4xl md:text-6xl font-bold leading-tight mb-4">Muthuraja M</h1>
-            <p id="hero-subtitle" class="text-lg md:text-xl mb-8 h-8">AI & Machine Learning Engineer | Flutter Developer</p>
-            <a href="#projects" class="bg-white text-indigo-600 font-bold py-3 px-6 rounded-full hover:bg-gray-200 transition duration-300 cta-button inline-block">View My Work</a>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section id="about" class="py-20 reveal">
-        <div class="container mx-auto px-6">
-            <h2 class="text-3xl font-bold text-center mb-12">About Me</h2>
-            <div class="flex flex-col md:flex-row items-center">
-                <div class="md:w-1/3 mb-8 md:mb-0">
-                    <img src="https://placehold.co/400x400/818cf8/ffffff?text=MM" alt="Muthuraja M" class="rounded-full mx-auto shadow-lg">
-                </div>
-                <div class="md:w-2/3 md:pl-12">
-                    <p class="text-lg text-gray-700 leading-relaxed">
-                        I am a dedicated AI & ML student currently pursuing my B.Tech degree at Sri Shakthi Institute of Engineering and Technology. With a strong foundation in Python and SQL, I have honed my problem-solving skills by tackling over 300 programming challenges.
-                    </p>
-                    <p class="text-lg text-gray-700 leading-relaxed mt-4">
-                        I am passionate about applying machine learning and Large Language Models (LLMs) to real-world challenges. I have experience developing mobile applications with Flutter, including integrating payment gateways, and my project work spans from deep learning for terrain recognition to building end-to-end data pipelines and language translators. I'm always eager to learn and build practical, impactful solutions.
-                    </p>
-                </div>
+    <main id="main" role="main">
+      <section class="hero">
+        <div class="container hero-inner">
+          <div class="hero-text">
+            <h1>Muthuraja — AI Engineer</h1>
+            <p>I build production-ready conversational AI and real‑time systems: voice agents (Twilio), multi‑party audio/video (LiveKit / Daily), and RAG pipelines with Qdrant and LangChain. I design end-to-end solutions from ingestion and embeddings through secure LLM deployment (AWS Bedrock) and client integrations.</p>
+            <div class="cta">
+              <a class="btn primary" href="#ai-projects">See Projects</a>
+              <a class="btn ghost" href="#demo">Try Demo</a>
             </div>
+          </div>
         </div>
-    </section>
+      </section>
 
-    <!-- Skills Section -->
-    <section id="skills" class="bg-gray-100 py-20 reveal">
-        <div class="container mx-auto px-6">
-            <h2 class="text-3xl font-bold text-center mb-12">My Skills</h2>
-            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-8">
-                <div class="skill-card p-6 rounded-lg shadow-md text-center card-reveal"><i class="fab fa-python fa-3x text-indigo-500 mb-4"></i><h3 class="text-xl font-semibold">Python</h3></div>
-                <div class="skill-card p-6 rounded-lg shadow-md text-center card-reveal"><i class="fas fa-robot fa-3x text-indigo-500 mb-4"></i><h3 class="text-xl font-semibold">Machine Learning</h3></div>
-                <div class="skill-card p-6 rounded-lg shadow-md text-center card-reveal"><i class="fas fa-brain fa-3x text-indigo-500 mb-4"></i><h3 class="text-xl font-semibold">Deep Learning</h3></div>
-                 <div class="skill-card p-6 rounded-lg shadow-md text-center card-reveal"><i class="fas fa-comments fa-3x text-indigo-500 mb-4"></i><h3 class="text-xl font-semibold">LLMs</h3></div>
-                <div class="skill-card p-6 rounded-lg shadow-md text-center card-reveal"><i class="fas fa-mobile-alt fa-3x text-indigo-500 mb-4"></i><h3 class="text-xl font-semibold">Flutter</h3></div>
-                <div class="skill-card p-6 rounded-lg shadow-md text-center card-reveal"><i class="fas fa-comments-dollar fa-3x text-indigo-500 mb-4"></i><h3 class="text-xl font-semibold">Generative AI</h3></div>
-                <div class="skill-card p-6 rounded-lg shadow-md text-center card-reveal"><i class="fas fa-database fa-3x text-indigo-500 mb-4"></i><h3 class="text-xl font-semibold">SQL & DBMS</h3></div>
-                <div class="skill-card p-6 rounded-lg shadow-md text-center card-reveal"><i class="fas fa-language fa-3x text-indigo-500 mb-4"></i><h3 class="text-xl font-semibold">NLP</h3></div>
-                <div class="skill-card p-6 rounded-lg shadow-md text-center card-reveal"><i class="fab fa-html5 fa-3x text-indigo-500 mb-4"></i><h3 class="text-xl font-semibold">HTML/CSS</h3></div>
-                <div class="skill-card p-6 rounded-lg shadow-md text-center card-reveal"><i class="fas fa-cogs fa-3x text-indigo-500 mb-4"></i><h3 class="text-xl font-semibold">OOPs</h3></div>
-            </div>
-        </div>
-    </section>
+      <section id="about" class="container about" role="region" aria-labelledby="about-heading">
+        <h2 id="about-heading">About</h2>
+        <p>I specialize in architecting and shipping conversational AI systems that are reliable in production. Typical engagements include document ingestion & retrieval (embeddings → Qdrant), building RAG layers with LangChain, integrating low‑latency audio/video using LiveKit/Daily.co, and deploying secure LLM inference on AWS Bedrock. I also build voice-first experiences using Twilio and connect ASR/TTS pipelines to agent cores.</p>
+      </section>
 
-    <!-- Projects Section -->
-    <section id="projects" class="py-20 reveal">
-        <div class="container mx-auto px-6">
-            <h2 class="text-3xl font-bold text-center mb-12">Projects</h2>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Project Card 1 -->
-                <div class="project-card rounded-lg shadow-lg overflow-hidden flex flex-col card-reveal">
-                    <img src="https://placehold.co/600x400/34d399/ffffff?text=Power+Conception+App" alt="Project Image" class="w-full h-48 object-cover">
-                    <div class="p-6 flex-grow">
-                        <h3 class="text-xl font-bold mb-2">Power Conception Mobile App</h3>
-                        <p class="text-gray-700 mb-4">A Flutter-based mobile application to monitor and manage power consumption.</p>
-                        <div class="flex flex-wrap gap-2"><span class="bg-indigo-100 text-indigo-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">Flutter</span><span class="bg-green-100 text-green-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">Mobile App</span></div>
-                    </div>
-                    <div class="p-4 bg-gray-50 border-t">
-                        <a href="#" target="_blank" class="w-full text-center block bg-gray-800 text-white font-semibold py-2 px-4 rounded-lg hover:bg-gray-900 transition duration-300"><i class="fab fa-github mr-2"></i>View Code</a>
-                    </div>
-                </div>
-                <!-- Project Card 2 -->
-                <div class="project-card rounded-lg shadow-lg overflow-hidden flex flex-col card-reveal">
-                    <img src="https://placehold.co/600x400/fbbf24/ffffff?text=E-commerce+App" alt="Project Image" class="w-full h-48 object-cover">
-                    <div class="p-6 flex-grow">
-                        <h3 class="text-xl font-bold mb-2">E-commerce Mobile App</h3>
-                        <p class="text-gray-700 mb-4">A full-featured e-commerce application with a payment gateway integration, built with Flutter.</p>
-                        <div class="flex flex-wrap gap-2"><span class="bg-indigo-100 text-indigo-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">Flutter</span><span class="bg-yellow-100 text-yellow-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">Payment Gateway</span></div>
-                    </div>
-                     <div class="p-4 bg-gray-50 border-t">
-                        <a href="#" target="_blank" class="w-full text-center block bg-gray-800 text-white font-semibold py-2 px-4 rounded-lg hover:bg-gray-900 transition duration-300"><i class="fab fa-github mr-2"></i>View Code</a>
-                    </div>
-                </div>
-                <!-- Project Card 3 -->
-                <div class="project-card rounded-lg shadow-lg overflow-hidden flex flex-col card-reveal">
-                    <img src="https://placehold.co/600x400/60a5fa/ffffff?text=Terrain+Recognition" alt="Project Image" class="w-full h-48 object-cover">
-                    <div class="p-6 flex-grow">
-                        <h3 class="text-xl font-bold mb-2">Terrain Recognition System</h3>
-                        <p class="text-gray-700 mb-4">A deep learning model to recognize and classify different types of terrain from images.</p>
-                        <div class="flex flex-wrap gap-2"><span class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">Deep Learning</span><span class="bg-gray-100 text-gray-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">Python</span></div>
-                    </div>
-                     <div class="p-4 bg-gray-50 border-t">
-                        <a href="#" target="_blank" class="w-full text-center block bg-gray-800 text-white font-semibold py-2 px-4 rounded-lg hover:bg-gray-900 transition duration-300"><i class="fab fa-github mr-2"></i>View Code</a>
-                    </div>
-                </div>
-                 <!-- Project Card 4 -->
-                <div class="project-card rounded-lg shadow-lg overflow-hidden flex flex-col card-reveal">
-                    <img src="https://placehold.co/600x400/f87171/ffffff?text=Crop+Recommendation" alt="Project Image" class="w-full h-48 object-cover">
-                    <div class="p-6 flex-grow">
-                        <h3 class="text-xl font-bold mb-2">ETL Crop Recommendation System</h3>
-                        <p class="text-gray-700 mb-4">End-to-end ETL pipeline with Apache Airflow to process weather data and recommend crops using a Random Forest model.</p>
-                        <div class="flex flex-wrap gap-2"><span class="bg-red-100 text-red-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">Apache Airflow</span><span class="bg-yellow-100 text-yellow-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">ETL</span><span class="bg-purple-100 text-purple-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">Random Forest</span></div>
-                    </div>
-                     <div class="p-4 bg-gray-50 border-t">
-                        <a href="#" target="_blank" class="w-full text-center block bg-gray-800 text-white font-semibold py-2 px-4 rounded-lg hover:bg-gray-900 transition duration-300"><i class="fab fa-github mr-2"></i>View Code</a>
-                    </div>
-                </div>
-                <!-- Project Card 5 -->
-                <div class="project-card rounded-lg shadow-lg overflow-hidden flex flex-col card-reveal">
-                    <img src="https://placehold.co/600x400/a78bfa/ffffff?text=Sentiment+Analysis" alt="Project Image" class="w-full h-48 object-cover">
-                    <div class="p-6 flex-grow">
-                        <h3 class="text-xl font-bold mb-2">Sentiment Analysis of YouTube History</h3>
-                        <p class="text-gray-700 mb-4">Analyzed YouTube watch history to categorize user preferences using NLP techniques and the YouTube Data API.</p>
-                        <div class="flex flex-wrap gap-2"><span class="bg-purple-100 text-purple-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">NLP</span><span class="bg-gray-100 text-gray-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">Python</span><span class="bg-red-100 text-red-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">NLTK</span></div>
-                    </div>
-                     <div class="p-4 bg-gray-50 border-t">
-                        <a href="#" target="_blank" class="w-full text-center block bg-gray-800 text-white font-semibold py-2 px-4 rounded-lg hover:bg-gray-900 transition duration-300"><i class="fab fa-github mr-2"></i>View Code</a>
-                    </div>
-                </div>
-                <!-- Project Card 6 -->
-                <div class="project-card rounded-lg shadow-lg overflow-hidden flex flex-col card-reveal">
-                    <img src="https://placehold.co/600x400/ec4899/ffffff?text=Lung+Cancer+Prediction" alt="Project Image" class="w-full h-48 object-cover">
-                    <div class="p-6 flex-grow">
-                        <h3 class="text-xl font-bold mb-2">Lung Cancer Prediction</h3>
-                        <p class="text-gray-700 mb-4">A system to predict lung cancer using various ML algorithms, including ANNs, and evaluated with accuracy metrics.</p>
-                        <div class="flex flex-wrap gap-2"><span class="bg-pink-100 text-pink-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">Machine Learning</span><span class="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">ANN</span><span class="bg-gray-100 text-gray-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded">Python</span></div>
-                    </div>
-                     <div class="p-4 bg-gray-50 border-t">
-                        <a href="#" target="_blank" class="w-full text-center block bg-gray-800 text-white font-semibold py-2 px-4 rounded-lg hover:bg-gray-900 transition duration-300"><i class="fab fa-github mr-2"></i>View Code</a>
-                    </div>
-                </div>
-            </div>
+      <section id="skills" class="container skills" role="region" aria-labelledby="skills-heading">
+        <h2 id="skills-heading">Skills & Technologies</h2>
+        <div class="grid">
+          <div class="card small"><i class="fa-brands fa-python" aria-hidden="true"></i><h3>Python</h3><p>Core programming language for AI/ML.</p></div>
+          <div class="card small"><i class="fa-solid fa-chart-line" aria-hidden="true"></i><h3>Machine Learning</h3><p>Building predictive models and algorithms.</p></div>
+          <div class="card small"><i class="fa-solid fa-network-wired" aria-hidden="true"></i><h3>Deep Learning</h3><p>Neural networks and advanced architectures.</p></div>
+          <div class="card small"><i class="fa-solid fa-comment-dots" aria-hidden="true"></i><h3>LLMs</h3><p>Large Language Models and fine-tuning.</p></div>
+          <div class="card small"><i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i><h3>Generative AI</h3><p>Creating content with AI models.</p></div>
+          <div class="card small"><i class="fa-solid fa-layer-group" aria-hidden="true"></i><h3>RAG</h3><p>Retrieval-Augmented Generation with embeddings.</p></div>
+          <div class="card small"><i class="fa-solid fa-language" aria-hidden="true"></i><h3>NLP</h3><p>Natural Language Processing techniques.</p></div>
+          <div class="card small"><i class="fa-solid fa-brain" aria-hidden="true"></i><h3>LangChain</h3><p>Orchestrating LLM prompts and chains.</p></div>
+          <div class="card small"><i class="fa-solid fa-sitemap" aria-hidden="true"></i><h3>LangGraph</h3><p>Visualizing LLM workflows and traces.</p></div>
+          <div class="card small"><i class="fa-solid fa-database" aria-hidden="true"></i><h3>SQL & DBMS</h3><p>Database management and queries.</p></div>
+          <div class="card small"><i class="fa-solid fa-database" aria-hidden="true"></i><h3>Qdrant</h3><p>Vector DB for semantic search and RAG.</p></div>
+          <div class="card small"><i class="fa-brands fa-aws" aria-hidden="true"></i><h3>AWS Bedrock</h3><p>Production LLMs and Bedrock agent cores.</p></div>
+          <div class="card small"><i class="fa-solid fa-mobile-screen" aria-hidden="true"></i><h3>Flutter</h3><p>Cross-platform mobile app development.</p></div>
+          <div class="card small"><i class="fa-solid fa-code" aria-hidden="true"></i><h3>HTML/CSS</h3><p>Web development fundamentals.</p></div>
+          <div class="card small"><i class="fa-solid fa-cubes" aria-hidden="true"></i><h3>OOPs</h3><p>Object-Oriented Programming principles.</p></div>
+          <div class="card small"><i class="fa-solid fa-video" aria-hidden="true"></i><h3>LiveKit</h3><p>Real-time audio/video infrastructure.</p></div>
+          <div class="card small"><i class="fa-solid fa-comments" aria-hidden="true"></i><h3>Daily.co</h3><p>Embedding video/voice experiences.</p></div>
+          <div class="card small"><i class="fa-solid fa-phone" aria-hidden="true"></i><h3>Twilio</h3><p>Programmable voice & SMS integrations.</p></div>
+          <div class="card small"><i class="fa-solid fa-microphone" aria-hidden="true"></i><h3>Voice Agents</h3><p>Speech → intent → action pipelines.</p></div>
+          <div class="card small"><i class="fa-solid fa-robot" aria-hidden="true"></i><h3>Chatbots</h3><p>LLM-driven conversational UX.</p></div>
         </div>
-    </section>
+      </section>
 
-    <!-- Certifications Section -->
-    <section id="certifications" class="bg-gray-100 py-20 reveal">
-        <div class="container mx-auto px-6">
-            <h2 class="text-3xl font-bold text-center mb-12">Certifications</h2>
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="cert-card p-6 rounded-lg shadow-md text-center card-reveal">
-                    <div class="text-4xl text-indigo-500 mb-4"><i class="fas fa-certificate"></i></div>
-                    <h3 class="text-xl font-semibold mb-2">Python</h3>
-                    <p class="text-gray-600">GUVI</p>
-                </div>
-                <div class="cert-card p-6 rounded-lg shadow-md text-center card-reveal">
-                    <div class="text-4xl text-indigo-500 mb-4"><i class="fas fa-certificate"></i></div>
-                    <h3 class="text-xl font-semibold mb-2">LLM Workshop</h3>
-                    <p class="text-gray-600">IIT Madras</p>
-                </div>
-                <div class="cert-card p-6 rounded-lg shadow-md text-center card-reveal">
-                    <div class="text-4xl text-indigo-500 mb-4"><i class="fas fa-certificate"></i></div>
-                    <h3 class="text-xl font-semibold mb-2">Pandas</h3>
-                    <p class="text-gray-600">Udemy</p>
-                </div>
-            </div>
-        </div>
-    </section>
+      <section id="ai-projects" class="container projects" role="region" aria-labelledby="ai-projects-heading">
+        <h2 id="ai-projects-heading">AI/ML & Agentic AI Projects</h2>
+        <div class="grid cards">
+          <article class="card project">
+            <h3><a href="https://github.com/Muthuraja997/MultiAgent_Medical_Assistant" target="_blank" rel="noopener">MultiAgent Medical Assistant</a></h3>
+            <p>Multi-agent system for medical assistance using AI agents that collaborate to provide health-related information and support.</p>
+            <p class="muted">Tech: Python, LangChain, Multi-Agent Systems</p>
+          </article>
+          
+          <article class="card project">
+            <h3><a href="https://github.com/Muthuraja997/academia-nexus" target="_blank" rel="noopener">Academia Nexus</a></h3>
+            <p>Academic platform connecting students, faculty, and resources in one unified system.</p>
+            <p class="muted">Tech: Python, Web Development</p>
+          </article>
 
-    <!-- Contact Section -->
-    <section id="contact" class="py-20 reveal">
-        <div class="container mx-auto px-6">
-            <h2 class="text-3xl font-bold text-center mb-12">Get In Touch</h2>
-            <div class="max-w-lg mx-auto text-center">
-                <p class="text-lg text-gray-700 mb-8">I'm currently seeking new opportunities. If you have a project in mind or just want to connect, feel free to reach out!</p>
-                <a href="mailto:muthuraja05980@gmail.com" class="bg-indigo-600 text-white font-bold py-3 px-6 rounded-full hover:bg-indigo-700 transition duration-300 inline-block"><i class="fas fa-envelope mr-2"></i> Email Me</a>
-                <div class="flex justify-center space-x-6 mt-8">
-                    <a href="#" class="text-gray-600 hover:text-indigo-600"><i class="fab fa-linkedin fa-2x"></i></a>
-                    <a href="#" class="text-gray-600 hover:text-indigo-600"><i class="fab fa-github fa-2x"></i></a>
-                </div>
-            </div>
-        </div>
-    </section>
+          <article class="card project">
+            <h3><a href="https://github.com/Muthuraja997/ai-mock-interview-system" target="_blank" rel="noopener">AI Mock Interview System</a></h3>
+            <p>AI-powered mock interview platform that simulates real interview scenarios and provides feedback.</p>
+            <p class="muted">Tech: JavaScript, AI/ML, Interview Simulation</p>
+          </article>
 
-    <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-6">
-        <div class="container mx-auto px-6 text-center">
-            <p>&copy; 2024 Muthuraja M. All Rights Reserved.</p>
+          <article class="card project">
+            <h3><a href="https://github.com/Muthuraja997/Talk_To_DB_using_RAG" target="_blank" rel="noopener">Talk To DB using RAG</a></h3>
+            <p>Natural language interface to query databases using Retrieval-Augmented Generation for intelligent data access.</p>
+            <p class="muted">Tech: Python, RAG, LLM, Database</p>
+          </article>
+
+          <article class="card project">
+            <h3><a href="https://github.com/Muthuraja997/PDF_summarization_using_gen_Ai" target="_blank" rel="noopener">PDF Summarization using Gen AI</a></h3>
+            <p>Generative AI-powered tool for automatic PDF document summarization and key information extraction.</p>
+            <p class="muted">Tech: Generative AI, NLP, Document Processing</p>
+          </article>
+
+          <article class="card project">
+            <h3><a href="https://github.com/Muthuraja997/PDF_Cotent_Extractor" target="_blank" rel="noopener">PDF Content Extractor</a></h3>
+            <p>Intelligent PDF content extraction tool for parsing and processing document data.</p>
+            <p class="muted">Tech: Python, PDF Processing, NLP</p>
+          </article>
+
+          <article class="card project">
+            <h3><a href="https://github.com/Muthuraja997/Lung-Cancer-Prediction-using-Machine-Learning" target="_blank" rel="noopener">Lung Cancer Prediction</a></h3>
+            <p>Machine learning model for early lung cancer prediction using medical data and diagnostic features.</p>
+            <p class="muted">Tech: Python, ML, Healthcare Analytics</p>
+          </article>
+
+          <article class="card project">
+            <h3><a href="https://github.com/Muthuraja997/Terrain_Recognition" target="_blank" rel="noopener">Terrain Recognition</a></h3>
+            <p>Computer vision system for terrain classification and recognition using deep learning models.</p>
+            <p class="muted">Tech: Python, Computer Vision, Deep Learning</p>
+          </article>
+
+          <article class="card project">
+            <h3><a href="https://github.com/Muthuraja997/Youtube-History-Analysis" target="_blank" rel="noopener">YouTube History Analysis</a></h3>
+            <p>Data analysis tool for YouTube watch history to extract insights and viewing patterns.</p>
+            <p class="muted">Tech: Python, Data Analysis, NLP</p>
+          </article>
         </div>
+      </section>
+
+      <section id="other-projects" class="container projects" role="region" aria-labelledby="other-projects-heading">
+        <h2 id="other-projects-heading">Other Projects</h2>
+        <div class="grid cards">
+          <article class="card project">
+            <h3><a href="https://github.com/Muthuraja997/Grid_Energy_Management_System_using_Ai" target="_blank" rel="noopener">Grid Energy Management System</a></h3>
+            <p>AI-powered energy grid management system for optimizing power distribution and consumption.</p>
+            <p class="muted">Tech: JavaScript, AI, Energy Management</p>
+          </article>
+
+        
+
+          <article class="card project">
+            <h3><a href="https://github.com/Muthuraja997/ETL_For_Data-Engineering" target="_blank" rel="noopener">ETL for Data Engineering</a></h3>
+            <p>End-to-end ETL pipeline for data extraction, transformation, and loading into data warehouses.</p>
+            <p class="muted">Tech: Python, ETL, Data Engineering</p>
+          </article>
+
+          <article class="card project">
+            <h3><a href="https://github.com/Muthuraja997/E-Commerce-App-With-Firebase" target="_blank" rel="noopener">E-Commerce App with Firebase</a></h3>
+            <p>Full-featured e-commerce mobile application with Firebase backend integration.</p>
+            <p class="muted">Tech: Dart, Flutter, Firebase</p>
+          </article>
+
+        
+
+          <article class="card project">
+            <h3><a href="https://github.com/Muthuraja997/Banking_system_using_mvc" target="_blank" rel="noopener">Banking System (MVC)</a></h3>
+            <p>Banking management system built using MVC architecture pattern.</p>
+            <p class="muted">Tech: Python, MVC, Database</p>
+          </article>
+
+      
+
+          <article class="card project">
+            <h3><a href="https://github.com/Muthuraja997/Translator-using-python" target="_blank" rel="noopener">Language Translator</a></h3>
+            <p>Multi-language translation tool built with Python for text translation between languages.</p>
+            <p class="muted">Tech: Python, NLP, Translation API</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="demo" class="container demo" role="region" aria-labelledby="demo-heading">
+        <h2 id="demo-heading">Interactive Chat (Demo)</h2>
+        <div class="demo-panel">
+          <div class="chat" id="chat" aria-describedby="demo-desc">
+            <div class="messages" id="messages" role="log" aria-live="polite" aria-atomic="false"></div>
+            <form id="chat-form" class="chat-form" aria-label="Demo chat form">
+              <label for="prompt" class="visually-hidden">Message</label>
+              <input id="prompt" placeholder="Ask about any project or say 'RAG demo'" autocomplete="off" aria-label="Chat input">
+              <button type="submit" aria-label="Send message">Send</button>
+            </form>
+            <p id="demo-desc" class="visually-hidden">This demo is a frontend placeholder. Connect to a backend to enable live responses.</p>
+          </div>
+          <aside class="demo-info" aria-label="Demo information">
+            <h4>Notes</h4>
+            <p>This demo UI is a placeholder. For production connect this UI to:</p>
+            <ul>
+              <li>LangChain + Qdrant API for RAG</li>
+              <li>Twilio or LiveKit backend for voice/video streams</li>
+              <li>AWS Bedrock for hosted LLMs and agent cores</li>
+            </ul>
+          </aside>
+        </div>
+      </section>
+
+      <section id="contact" class="container contact" role="region" aria-labelledby="contact-heading">
+        <h2 id="contact-heading">Contact</h2>
+        <p>Interested in collaborating? Feel free to reach out!</p>
+        <p>Email: <a href="mailto:muthuraja05980@gmail.com">muthuraja05980@gmail.com</a></p>
+        <p>GitHub: <a href="https://github.com/Muthuraja997" target="_blank" rel="noopener">github.com/Muthuraja997</a></p>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container">© 2025 Muthuraja — AI Engineer</div>
     </footer>
 
-    <script>
-        // --- DOM Elements ---
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        const mobileMenu = document.getElementById('mobile-menu');
-
-        // --- Event Listeners ---
-        mobileMenuButton.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
-
-        // --- Particle Animation ---
-        const canvas = document.getElementById('particle-canvas');
-        const ctx = canvas.getContext('2d');
-        let particles = [];
-
-        function resizeCanvas() {
-            canvas.width = canvas.offsetWidth;
-            canvas.height = canvas.offsetHeight;
-        }
-
-        function createParticles() {
-            particles = [];
-            const particleCount = Math.floor(canvas.width / 30);
-            for (let i = 0; i < particleCount; i++) {
-                particles.push({
-                    x: Math.random() * canvas.width,
-                    y: Math.random() * canvas.height,
-                    radius: Math.random() * 2 + 1,
-                    vx: Math.random() * 1 - 0.5,
-                    vy: Math.random() * 1 - 0.5,
-                    color: 'rgba(255, 255, 255, 0.7)'
-                });
-            }
-        }
-
-        function animateParticles() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach(p => {
-                p.x += p.vx;
-                p.y += p.vy;
-
-                if (p.x < 0 || p.x > canvas.width) p.vx = -p.vx;
-                if (p.y < 0 || p.y > canvas.height) p.vy = -p.vy;
-
-                ctx.beginPath();
-                ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
-                ctx.fillStyle = p.color;
-                ctx.fill();
-            });
-            requestAnimationFrame(animateParticles);
-        }
-        
-        // --- Typing Animation ---
-        const subtitleEl = document.getElementById('hero-subtitle');
-        const subtitleText = subtitleEl.textContent;
-        let i = 0;
-        
-        function typeWriter() {
-            if (i < subtitleText.length) {
-                if(i === 0) subtitleEl.textContent = '';
-                subtitleEl.textContent += subtitleText.charAt(i);
-                i++;
-                setTimeout(typeWriter, 100); // Typing speed
-            } else {
-                 // Add blinking cursor at the end
-                 subtitleEl.innerHTML += '<span class="typing-cursor"></span>';
-            }
-        }
-
-        // --- Scroll Reveal and Staggered Animation ---
-        function revealSections() {
-            const reveals = document.querySelectorAll('.reveal');
-            for (let i = 0; i < reveals.length; i++) {
-                const windowHeight = window.innerHeight;
-                const elementTop = reveals[i].getBoundingClientRect().top;
-                const elementVisible = 150;
-
-                if (elementTop < windowHeight - elementVisible) {
-                    reveals[i].classList.add('active');
-                } else {
-                    reveals[i].classList.remove('active');
-                }
-            }
-        }
-
-        // --- Initializations on Load ---
-        window.addEventListener('load', () => {
-            // Particle setup
-            resizeCanvas();
-            createParticles();
-            animateParticles();
-
-            // Typing animation start
-            setTimeout(typeWriter, 500);
-
-            // Staggered delay setup
-            document.querySelectorAll('.reveal').forEach(section => {
-                const cards = section.querySelectorAll('.card-reveal');
-                cards.forEach((card, index) => {
-                    card.style.transitionDelay = `${index * 100}ms`;
-                });
-            });
-            
-            // Initial check for reveals
-            revealSections();
-        });
-
-        window.addEventListener('resize', () => {
-            resizeCanvas();
-            createParticles();
-        });
-
-        window.addEventListener('scroll', revealSections);
-    </script>
-</body>
+    <script src="./assets/js/main.js"></script>
+  </body>
 </html>
