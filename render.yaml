@@ -1,0 +1,9 @@
+services:
+  - type: web
+    name: muthuraja-portfolio-chat
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn chat:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: GEMINI_API_KEY
+        sync: false
