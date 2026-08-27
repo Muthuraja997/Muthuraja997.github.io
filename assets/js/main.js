@@ -202,6 +202,46 @@ function typeWriter(element, text, speed = 50) {
 window.addEventListener('load', () => {
   createParticles();
   
+  // Typewriter effect for hero
+  const typedTextEl = document.getElementById('typed-text');
+  if (typedTextEl) {
+    const phrases = [
+      'Generative AI Developer',
+      'Multi-Agent Systems Builder',
+      'RAG Pipeline Architect',
+      'Machine Learning Engineer',
+      'NLP & LLM Specialist'
+    ];
+    let phraseIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+
+    function typeLoop() {
+      const current = phrases[phraseIndex];
+      if (isDeleting) {
+        typedTextEl.textContent = current.substring(0, charIndex - 1);
+        charIndex--;
+      } else {
+        typedTextEl.textContent = current.substring(0, charIndex + 1);
+        charIndex++;
+      }
+
+      let delay = isDeleting ? 40 : 80;
+
+      if (!isDeleting && charIndex === current.length) {
+        delay = 2000;
+        isDeleting = true;
+      } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        phraseIndex = (phraseIndex + 1) % phrases.length;
+        delay = 500;
+      }
+
+      setTimeout(typeLoop, delay);
+    }
+    typeLoop();
+  }
+  
   // Add reveal class to sections for scroll animation
   document.querySelectorAll('section').forEach(section => {
     section.classList.add('reveal');
