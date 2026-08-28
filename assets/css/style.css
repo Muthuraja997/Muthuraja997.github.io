@@ -288,6 +288,7 @@ h2 {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 20px;
+  align-items: stretch;
 }
 
 .card {
@@ -324,6 +325,9 @@ h2 {
 .card.small {
   text-align: center;
   padding: 28px 20px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .card.small i {
@@ -352,10 +356,19 @@ h2 {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 24px;
+  align-items: stretch;
 }
 
 .card.project {
   padding: 32px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.card.project p:last-child {
+  margin-top: auto;
+  padding-top: 12px;
 }
 
 .card.project h3 {
@@ -518,6 +531,36 @@ h2 {
 }
 .contact a:hover { color: var(--text); }
 
+.socials {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 24px;
+}
+
+.socials a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 22px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--card);
+  font-size: 15px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.socials a:hover {
+  transform: translateY(-3px);
+  border-color: var(--accent);
+  box-shadow: 0 8px 24px var(--accent-glow);
+  color: var(--text);
+}
+
+.socials a i { font-size: 18px; }
+
 /* Footer */
 .footer {
   padding: 40px 0;
@@ -551,18 +594,18 @@ h2 {
 }
 
 /* Staggered animation for cards */
-.card { opacity: 0; animation: fadeInUp 0.6s ease forwards; }
-.grid .card:nth-child(1) { animation-delay: 0.1s; }
-.grid .card:nth-child(2) { animation-delay: 0.15s; }
-.grid .card:nth-child(3) { animation-delay: 0.2s; }
-.grid .card:nth-child(4) { animation-delay: 0.25s; }
-.grid .card:nth-child(5) { animation-delay: 0.3s; }
-.grid .card:nth-child(6) { animation-delay: 0.35s; }
-.grid .card:nth-child(7) { animation-delay: 0.4s; }
-.grid .card:nth-child(8) { animation-delay: 0.45s; }
-.grid .card:nth-child(9) { animation-delay: 0.5s; }
-.grid .card:nth-child(10) { animation-delay: 0.55s; }
-.grid .card:nth-child(n+11) { animation-delay: 0.6s; }
+.card {
+  opacity: 0;
+  animation: fadeInUp 0.6s ease forwards;
+  animation-fill-mode: both;
+}
+.grid .card:nth-child(1) { animation-delay: 0.05s; }
+.grid .card:nth-child(2) { animation-delay: 0.1s; }
+.grid .card:nth-child(3) { animation-delay: 0.15s; }
+.grid .card:nth-child(4) { animation-delay: 0.2s; }
+.grid .card:nth-child(5) { animation-delay: 0.25s; }
+.grid .card:nth-child(6) { animation-delay: 0.3s; }
+.grid .card:nth-child(n+7) { animation-delay: 0.35s; }
 
 /* Mobile Responsive */
 @media (max-width: 900px) {
